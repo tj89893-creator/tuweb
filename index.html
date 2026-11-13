@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tu emprendimiento en línea | Páginas web para emprendedores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    box-sizing: border-box;
+    --bg: #fbf7f2;
+    --surface: #ffffff;
+    --text: #1d1a17;
+    --muted: #6b635b;
+    --accent: #ff6b4a;
+    --accent-2: #7c5cff;
+    --line: #ece4d9;
+    --shadow: 0 20px 50px -20px rgba(60, 40, 20, .25);
+    --grad: linear-gradient(135deg, #ff6b4a 0%, #ff9a3c 45%, #7c5cff 100%);
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141110;
+      --surface: #1f1b19;
+      --text: #f6efe8;
+      --muted: #b3a89d;
+      --line: #2e2825;
+      --shadow: 0 20px 50px -20px rgba(0, 0, 0, .6);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #141110;
+    --surface: #1f1b19;
+    --text: #f6efe8;
+    --muted: #b3a89d;
+    --line: #2e2825;
+    --shadow: 0 20px 50px -20px rgba(0, 0, 0, .6);
+    color-scheme: dark;
+  }
+
+  * { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+  body {
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, .brand { font-family: "Outfit", system-ui, sans-serif; }
+  a { color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 22px; }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 20;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { font-weight: 800; font-size: 1.15rem; letter-spacing: -.01em; }
+  .brand span { color: var(--accent); }
+  .nav-links { display: flex; gap: 22px; font-size: .95rem; }
+  .nav-links a { text-decoration: none; color: var(--muted); }
+  .nav-links a:hover { color: var(--text); }
+  @media (max-width: 640px) { .nav-links a:not(.nav-cta) { display: none; } }
+  .nav-cta {
+    background: var(--text); color: var(--bg) !important;
+    padding: 8px 16px; border-radius: 999px; text-decoration: none; font-weight: 500;
+  }
+
+  /* HERO */
+  .hero { padding: 90px 0 70px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: -20% -10% auto; height: 520px; z-index: -1;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%),
+                radial-gradient(closest-side at 80% 30%, color-mix(in srgb, var(--accent-2) 18%, transparent), transparent 70%);
+  }
+  .pill {
+    display: inline-block; font-size: .85rem; font-weight: 500;
+    padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line);
+    background: var(--surface); color: var(--muted); margin-bottom: 22px;
+  }
+  h1 {
+    font-size: clamp(2.3rem, 6vw, 4rem); line-height: 1.05; font-weight: 800;
+    letter-spacing: -.03em; max-width: 860px; margin: 0 auto 20px;
+  }
+  h1 .grad {
+    background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p.lead { font-size: 1.15rem; color: var(--muted); max-width: 620px; margin: 0 auto 34px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+    padding: 14px 24px; border-radius: 14px; font-weight: 600; font-size: 1rem;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--grad); color: #fff; box-shadow: 0 12px 30px -10px rgba(255, 107, 74, .6); }
+  .btn-ghost { border: 1px solid var(--line); background: var(--surface); color: var(--text); }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  /* SECTIONS */
+  section { padding: 80px 0; }
+  .section-head { text-align: center; margin-bottom: 48px; }
+  .eyebrow { color: var(--accent); font-weight: 600; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; }
+  h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -.02em; margin-top: 8px; }
+  .section-head p { color: var(--muted); max-width: 560px; margin: 12px auto 0; }
+
+  /* CAROUSEL */
+  .showcase {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 28px;
+    box-shadow: var(--shadow); padding: 28px; max-width: 760px; margin: 0 auto;
+  }
+  .screen {
+    position: relative; height: 340px; border-radius: 18px; overflow: hidden;
+    background: var(--bg); border: 1px solid var(--line);
+  }
+  .slide {
+    position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 30px; opacity: 0; transform: translateX(40px) scale(.98);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .slide.active { opacity: 1; transform: none; }
+  .slide .emoji { font-size: 4rem; margin-bottom: 14px; }
+  .slide h3 { font-size: 1.5rem; margin-bottom: 6px; }
+  .slide p { color: var(--muted); font-size: .98rem; }
+  .slide .tag {
+    display: inline-block; margin-top: 14px; font-size: .8rem; font-weight: 600;
+    padding: 5px 12px; border-radius: 999px; color: #fff; background: var(--grad);
+  }
+  .dots { display: flex; gap: 8px; justify-content: center; margin-top: 18px; }
+  .dot {
+    width: 9px; height: 9px; border-radius: 99px; border: 0; cursor: pointer;
+    background: var(--line); transition: width .3s, background .3s;
+  }
+  .dot.active { width: 28px; background: var(--accent); }
+  .showcase-note { text-align: center; color: var(--muted); font-size: .9rem; margin-top: 16px; }
+
+  /* PLANS */
+  .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 880px; margin: 0 auto; }
+  .plan {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 26px;
+    padding: 36px 32px; display: flex; flex-direction: column; position: relative;
+    transition: transform .25s, box-shadow .25s;
+  }
+  .plan:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .plan.featured { border: 2px solid var(--accent); }
+  .badge {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: var(--grad); color: #fff; font-size: .78rem; font-weight: 600;
+    padding: 5px 14px; border-radius: 999px; white-space: nowrap;
+  }
+  .plan h3 { font-size: 1.4rem; }
+  .plan .desc { color: var(--muted); font-size: .95rem; margin: 6px 0 22px; }
+  .price { font-family: "Outfit", sans-serif; font-size: 3rem; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+  .price small { font-size: 1rem; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+  .price-note { color: var(--muted); font-size: .88rem; margin: 8px 0 24px; }
+  ul.features { list-style: none; margin-bottom: 30px; display: grid; gap: 11px; }
+  ul.features li { display: flex; gap: 10px; font-size: .95rem; }
+  ul.features li::before {
+    content: "✓"; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%;
+    background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent);
+    display: grid; place-items: center; font-size: .75rem; font-weight: 700; margin-top: 2px;
+  }
+  .plan .btn { justify-content: center; margin-top: auto; }
+
+  /* CONTACT */
+  .contact {
+    background: var(--text); color: var(--bg); border-radius: 32px; padding: 60px 30px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .contact::after {
+    content: ""; position: absolute; width: 380px; height: 380px; right: -120px; top: -140px;
+    background: var(--grad); opacity: .35; filter: blur(60px); border-radius: 50%;
+  }
+  .contact > * { position: relative; }
+  .contact h2 { color: var(--bg); }
+  .contact p { opacity: .75; max-width: 520px; margin: 14px auto 32px; }
+  .contact-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .contact .btn-ghost { background: transparent; color: var(--bg); border-color: color-mix(in srgb, var(--bg) 30%, transparent); }
+  .contact .btn-primary { background: #25d366; box-shadow: 0 12px 30px -10px rgba(37, 211, 102, .6); }
+  .contact .btn svg { width: 20px; height: 20px; }
+
+  footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 40px 0 50px; }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+    html { scroll-behavior: auto; }
+  }
+  @media (max-width: 640px) {
+    .hero { padding: 60px 0 50px; }
+    section { padding: 60px 0; }
+    .screen { height: 300px; }
+    .plan { padding: 30px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">Tu<span>Web</span>.</div>
+    <div class="nav-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#planes">Planes</a>
+      <a href="#contacto" class="nav-cta">Hablemos</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="pill">Páginas web para emprendedores</span>
+    <h1>Tu negocio online, <span class="grad">listo para vender</span></h1>
+    <p class="lead">Diseño una página web linda, rápida y pensada para que tus clientes te encuentren y te contacten. Sin complicaciones técnicas.</p>
+    <div class="hero-btns">
+      <a class="btn btn-primary" href="#planes">Ver planes</a>
+      <a class="btn btn-ghost" href="#contacto">Escribime</a>
+    </div>
+  </div>
+</header>
+
+<section id="servicios">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Así se ve</div>
+      <h2>Tus productos, siempre a la vista</h2>
+      <p>Una vitrina que rota tus productos o servicios automáticamente, para que cada visita vea algo nuevo.</p>
+    </div>
+
+    <div class="showcase reveal" id="showcase">
+      <div class="screen" id="screen">
+        <div class="slide active"><div class="emoji">👗</div><h3>Ropa de temporada</h3><p>Colección nueva con envíos a todo el país.</p><span class="tag">Nuevo</span></div>
+        <div class="slide"><div class="emoji">☕</div><h3>Café de especialidad</h3><p>Granos tostados cada semana, para llevar o en el local.</p><span class="tag">Recomendado</span></div>
+        <div class="slide"><div class="emoji">💅</div><h3>Turnos online</h3><p>Tus clientes reservan desde el celular, sin llamar.</p><span class="tag">Disponible</span></div>
+        <div class="slide"><div class="emoji">🎁</div><h3>Promos del mes</h3><p>Destacá ofertas, combos y packs especiales.</p><span class="tag">Oferta</span></div>
+      </div>
+      <div class="dots" id="dots"></div>
+      <p class="showcase-note">Ejemplo ilustrativo del plan con productos rotativos.</p>
+    </div>
+  </div>
+</section>
+
+<section id="planes" style="padding-top: 20px;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Planes</div>
+      <h2>Elegí cómo querés crecer</h2>
+      <p>Dos opciones simples, sin letra chica.</p>
+    </div>
+
+    <div class="plans">
+      <div class="plan reveal">
+        <h3>Página con productos rotativos</h3>
+        <p class="desc">Ideal si cambiás tu catálogo seguido y querés mostrar siempre lo más nuevo.</p>
+        <div class="price">$25.000 <small>/ mes</small></div>
+        <p class="price-note">Mantenimiento y actualizaciones incluidas</p>
+        <ul class="features">
+          <li>Carrusel de productos que rota solo</li>
+          <li>Cambios de productos cuando lo necesites</li>
+          <li>Diseño adaptado a celular</li>
+          <li>Botón directo a WhatsApp</li>
+          <li>Soporte mensual</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contacto">Quiero este plan</a>
+      </div>
+
+      <div class="plan featured reveal">
+        <span class="badge">Pago único</span>
+        <h3>Página web normal</h3>
+        <p class="desc">Una página completa para presentar tu negocio, tus servicios y tus datos de contacto.</p>
+        <div class="price">$50.000 <small>único</small></div>
+        <p class="price-note">Sin cuotas ni pagos mensuales</p>
+        <ul class="features">
+          <li>Diseño personalizado y moderno</li>
+          <li>Secciones: inicio, servicios, sobre vos y contacto</li>
+          <li>Optimizada para celular y Google</li>
+          <li>Botones de WhatsApp e Instagram</li>
+          <li>Lista para publicar</li>
+        </ul>
+        <a class="btn btn-primary" href="#contacto">Quiero este plan</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <div class="contact reveal">
+      <div class="eyebrow" style="color: var(--accent);">Hablemos</div>
+      <h2>¿Tenés un emprendimiento? Armemos tu página</h2>
+      <p>Contame sobre tu negocio y te respondo con una propuesta a medida, sin compromiso.</p>
+      <div class="contact-btns">
+        <a class="btn btn-primary" href="https://wa.me/5492983652684?text=Hola!%20Quiero%20info%20sobre%20una%20p%C3%A1gina%20web" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+          WhatsApp
+        </a>
+        <a class="btn btn-ghost" href="https://www.instagram.com/_16tiagoo_/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          Instagram
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© <span id="year"></span> Tu Web. Páginas web para emprendedores.</div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Carrusel de productos rotativos
+  (function () {
+    const slides = Array.from(document.querySelectorAll("#screen .slide"));
+    const dotsWrap = document.getElementById("dots");
+    const screen = document.getElementById("screen");
+    let current = 0, timer = null;
+
+    slides.forEach((_, i) => {
+      const b = document.createElement("button");
+      b.className = "dot" + (i === 0 ? " active" : "");
+      b.setAttribute("aria-label", "Ver producto " + (i + 1));
+      b.addEventListener("click", () => { go(i); restart(); });
+      dotsWrap.appendChild(b);
+    });
+    const dots = Array.from(dotsWrap.children);
+
+    function go(i) {
+      slides[current].classList.remove("active");
+      dots[current].classList.remove("active");
+      current = (i + slides.length) % slides.length;
+      slides[current].classList.add("active");
+      dots[current].classList.add("active");
+    }
+    function restart() {
+      clearInterval(timer);
+      timer = setInterval(() => go(current + 1), 3200);
+    }
+    screen.addEventListener("mouseenter", () => clearInterval(timer));
+    screen.addEventListener("mouseleave", restart);
+    restart();
+  })();
+
+  // Animación al hacer scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+</script>
+</body>
+</html>
